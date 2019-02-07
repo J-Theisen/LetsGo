@@ -23,7 +23,18 @@ public class GameDaoDB implements NewGameDao {
     @Override
     public Game createNewGame(Game game) {
         final String CREATE_NEW_GAME = "INSERT INTO Game(GameLeader, StartTime) VALUES(?, ?)";
-        jdbc.update(CREATE_NEW_GAME, game.getGameLeader(), game.getStartTime());
+        int updated = jdbc.update(CREATE_NEW_GAME, game.getGameLeader(), game.getStartTime());
+        // I dont know about this.... This is incredibly flimsy
+        if (updated == 1) {
+            List<Game> games = getGamesByUsername(game.getGameLeader());
+            Game gameTemp = games.get(0);
+            for (Game g : games) {
+                if (g.getGameId() > gameTemp.getGameId()) {
+                    gameTemp = g;
+                }
+            }
+            return gameTemp;
+        }
         return game;
     }
 
@@ -32,7 +43,7 @@ public class GameDaoDB implements NewGameDao {
         try {
             final String GET_GAMES_BY_USERNAME = "SELECT * FROM Game WHERE GameLeader = ?";
             return jdbc.query(GET_GAMES_BY_USERNAME, new GameMapper(), username);
-           
+
         } catch (DataAccessException ex) {
             return null;
         }
@@ -47,7 +58,7 @@ public class GameDaoDB implements NewGameDao {
                 game.getGameId());
         return game;
     }
-    
+
     //Dont think ill need
     @Override
     public Game getGameById(int gameId) {
