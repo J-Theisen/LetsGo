@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lets Go!!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Create Account</h1>
+        </div>
+        <form method="POST">
+            <div class="row">
+                <label for="username">
+                    <h6>Username:</h6>
+                </label>
+                <input id="userName" name="userName" type="text" class="form-control">
+                <div th:if="${#fields.hasErrors('player.userName')}">
+                    <p th:each="error : ${#fields.errors('player.userName')}" class="alert alert-danger" th:text="${error}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <label for="firstName">
+                    <h6>First Name:</h6>
+                </label>
+                <input id="firstName" name="firstName" type="text" class="form-control">
+                <label for="lastName">
+                    <h6>Last Name:</h6>
+                </label>
+                <input id="lastname" name="lastName" type="text" class="form-control">
+            </div>
+            <div class="row">
+                <label for="email">
+                    <h6>Email:</h6>
+                </label>
+                <input id="email" name="playerEmail" type="text" class="form-control">
+                <label for="password">
+                    <h6>Password:</h6>
+                </label>
+                <input id="password" name="playerPassword" type="password" class="form-control">
+            </div>
+            <div class="row">
+                <!-- <div id="createButton"><a href="" class="btn btn-primary">Create!</a></div> -->
+                <button id="createButton" type="submit" class="btn btn-primary">Create Account!</button>
+                <div id="cancelButton"><a href="/" class="btn btn-danger">Cancel</a></div>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

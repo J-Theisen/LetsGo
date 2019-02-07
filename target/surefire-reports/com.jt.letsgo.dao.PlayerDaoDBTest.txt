@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.jt.letsgo.dao.PlayerDaoDBTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.041 s - in com.jt.letsgo.dao.PlayerDaoDBTest

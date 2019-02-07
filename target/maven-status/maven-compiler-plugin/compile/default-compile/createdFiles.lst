@@ -1,0 +1,8 @@
+com\jt\letsgo\dao\PlayerDaoDB.class
+com\jt\letsgo\service\PlayerService.class
+com\jt\letsgo\LetsGoApplication.class
+com\jt\letsgo\dao\PlayerDaoDB$PlayerMapper.class
+com\jt\letsgo\dto\Player.class
+com\jt\letsgo\controller\MainController.class
+com\jt\letsgo\controller\PlayerController.class
+com\jt\letsgo\dao\PlayerDao.class
