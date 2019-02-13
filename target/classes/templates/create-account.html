@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lets Go!!</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -15,6 +15,11 @@
         <div class="row">
             <h1>Create Account</h1>
         </div>
+        <!-- <div class="row">
+            <div class="col-12 m-1 text-center" th:if="${!errors.isEmpty()}">
+                <p class="alert alert-danger" th:each="error : ${errors}" th:text="${error.message}">Error message</p>
+            </div>
+        </div> -->
         <form method="POST">
             <div class="row">
                 <label for="username">
@@ -25,26 +30,43 @@
                     <p th:each="error : ${#fields.errors('player.userName')}" class="alert alert-danger" th:text="${error}"></p>
                 </div>
             </div>
+
             <div class="row">
                 <label for="firstName">
                     <h6>First Name:</h6>
                 </label>
                 <input id="firstName" name="firstName" type="text" class="form-control">
+                <div th:if="${#fields.hasErrors('player.firstName')}">
+                    <p th:each="error : ${#fields.errors('player.firstName')}" class="alert alert-danger" th:text="${error}"></p>
+                </div>
+
                 <label for="lastName">
                     <h6>Last Name:</h6>
                 </label>
                 <input id="lastname" name="lastName" type="text" class="form-control">
+                <div th:if="${#fields.hasErrors('player.lastName')}">
+                    <p th:each="error : ${#fields.errors('player.lastName')}" class="alert alert-danger" th:text="${error}"></p>
+                </div>
             </div>
+
             <div class="row">
                 <label for="email">
                     <h6>Email:</h6>
                 </label>
-                <input id="email" name="playerEmail" type="text" class="form-control">
+                <input id="email" name="playerEmail" type="email" class="form-control">
+                <div th:if="${#fields.hasErrors('player.playerEmail')}">
+                    <p th:each="error : ${#fields.errors('player.playerEmail')}" class="alert alert-danger" th:text="${error}"></p>
+                </div>
+
                 <label for="password">
                     <h6>Password:</h6>
                 </label>
                 <input id="password" name="playerPassword" type="password" class="form-control">
+                <div th:if="${#fields.hasErrors('player.playerPassword')}">
+                    <p th:each="error : ${#fields.errors('player.playerPassword')}" class="alert alert-danger" th:text="${error}"></p>
+                </div>
             </div>
+            
             <div class="row">
                 <!-- <div id="createButton"><a href="" class="btn btn-primary">Create!</a></div> -->
                 <button id="createButton" type="submit" class="btn btn-primary">Create Account!</button>

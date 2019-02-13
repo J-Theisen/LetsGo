@@ -11,32 +11,50 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class GamePlayerDaoDB implements GamePlayerDao {
-    
+
     @Autowired
     JdbcTemplate jdbc;
 
     @Override
     public GamePlayer addPlayerToGame(GamePlayer gp) {
         final String ADD_PLAYER = "INSERT INTO GamePlayer(GameId, PlayerName) VALUES(?,?)";
-        jdbc.update(ADD_PLAYER, 
-                    gp.getGameId(),
-                    gp.getPlayerName());
+        jdbc.update(ADD_PLAYER,
+                gp.getGameId(),
+                gp.getPlayerName());
         return gp;
     }
 
     @Override
     public GamePlayer getPlayer(int gameId, String playerName) {
-        
+        final String GET_PLAYER = "SELECT * FROM GamePlayer WHERE GameId = ? AND PlayerName = ?";
+        return jdbc.queryForObject(GET_PLAYER, new GamePlayerMapper(), gameId, playerName);
     }
 
     @Override
     public List<GamePlayer> getAllPlayersForGame(int gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String GET_ALL_PLAYERS_FOR_GAME = "SELECT * FROM GamePlayer WHERE GameId = ?";
+        return jdbc.query(GET_ALL_PLAYERS_FOR_GAME, new GamePlayerMapper(), gameId);
     }
 
     @Override
-    public GamePlayer updateGamePlayer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GamePlayer updateGamePlayerCurrency(GamePlayer gp) {
+        final String UPDATE_PLAYER = "UPDATE GamePlayer SET PlayerCurrency = ? WHERE GameId = ? AND PlayerName = ?";
+        jdbc.update(UPDATE_PLAYER, gp.getPlayerCurrency(), gp.getGameId(), gp.getPlayerName());
+        return gp;
+    }
+
+    @Override
+    public GamePlayer updateGamePlayerCharacter(GamePlayer gp) {
+        final String UPDATE_PLAYER = "UPDATE GamePlayer SET PlayerCharacter = ?, ImgUrl = ? WHERE GameId = ? AND PlayerName = ?";
+        jdbc.update(UPDATE_PLAYER, gp.getPlayerCharacter(), gp.getImageUrl(),gp.getGameId(), gp.getPlayerName());
+        return gp;
+    }
+    
+    @Override
+    public GamePlayer updateTurnNumber(GamePlayer gp){
+        final String UPDATE_PLAYER_TURN = "UPDATE GamePlayer SET PlayerTurn = ? WHERE GameId = ? AND PlayerName = ?";
+        jdbc.update(UPDATE_PLAYER_TURN, gp.getPlayerTurn(), gp.getGameId(), gp.getPlayerName());
+        return gp;
     }
 
     public static final class GamePlayerMapper implements RowMapper<GamePlayer> {
@@ -49,6 +67,8 @@ public class GamePlayerDaoDB implements GamePlayerDao {
             gp.setPlayerName(rs.getString("PlayerName"));
             gp.setPlayerCurrency(rs.getInt("PlayerCurrency"));
             gp.setPlayerCharacter(rs.getInt("PlayerCharacter"));
+            gp.setPlayerTurn(rs.getInt("PlayerTurn"));
+            gp.setImageUrl(rs.getString("ImgUrl"));
             return gp;
         }
     }

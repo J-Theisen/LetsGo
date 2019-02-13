@@ -13,6 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class GameDaoDB implements NewGameDao {
@@ -21,20 +22,12 @@ public class GameDaoDB implements NewGameDao {
     JdbcTemplate jdbc;
 
     @Override
+    @Transactional
     public Game createNewGame(Game game) {
         final String CREATE_NEW_GAME = "INSERT INTO Game(GameLeader, StartTime) VALUES(?, ?)";
         int updated = jdbc.update(CREATE_NEW_GAME, game.getGameLeader(), game.getStartTime());
-        // I dont know about this.... This is incredibly flimsy
-        if (updated == 1) {
-            List<Game> games = getGamesByUsername(game.getGameLeader());
-            Game gameTemp = games.get(0);
-            for (Game g : games) {
-                if (g.getGameId() > gameTemp.getGameId()) {
-                    gameTemp = g;
-                }
-            }
-            return gameTemp;
-        }
+        int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        game.setGameId(newId);
         return game;
     }
 
@@ -59,10 +52,10 @@ public class GameDaoDB implements NewGameDao {
         return game;
     }
 
-    //Dont think ill need
     @Override
     public Game getGameById(int gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String GET_GAME_BY_ID = "SELECT * FROM Game WHERE GameId = ?";
+        return jdbc.queryForObject(GET_GAME_BY_ID, new GameMapper(), gameId);
     }
 
     public static final class GameMapper implements RowMapper<Game> {

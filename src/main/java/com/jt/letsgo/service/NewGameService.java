@@ -27,4 +27,8 @@ public class NewGameService {
     public Game updateGameOver(Game game) {
         return newGameDao.updateGameOver(game);
     }
+    
+    public Game getGameById(int gameId){
+        return newGameDao.getGameById(gameId);
+    }
 }

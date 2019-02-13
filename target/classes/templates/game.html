@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lets Go!</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/game.css">
+
+</head>
+
+<body onload="loadUp()">
+
+    <div class="row">
+        <div id="playerInfoContainer" class="container col-md-3">
+            <div id="gamePlayerTableDiv" class="container">
+                <table id="gamePlayerTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Turn Number: </th>
+                            <th>Players:</th>
+                            <th>Monies</th>
+                        </tr>
+                    </thead>
+                    <tr th:each="gamePlayer : ${players}">
+                        <td>
+                                <p th:text="${gamePlayer.playerTurn}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${gamePlayer.playerName}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${gamePlayer.playerCurrency}"></p>
+                        </td>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="gameContainer" class="container col-md-9">
+            <div class="row">
+                <div id="t1" class="tile border">
+                    <span id="startSpan">
+                        <h6>Start</h6>
+                        <p>1</p>
+                    </span>
+                    <!-- <div id="ghostDiv" class="ghost">
+                        <img id="ghostImg" src="/images/sq.png">
+                    </div> -->
+                </div>
+                <div id="t12" class="tile border">
+                    <p>12</p>
+                </div>
+                <div id="t11" class="tile border">
+                    <p>11</p>
+                </div>
+                <div id="t10" class="tile border">
+                    <p>10</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="t2" class="tile border">
+                    <p>2</p>
+                </div>
+                <div class="tile border">
+                    <p>nothing</p>
+                </div>
+                <div class="tile border">
+                    <p>nothing</p>
+                </div>
+                <div id="t9" class="tile border">
+                    <p>9</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="t3" class="tile border">
+                    <p>3</p>
+                </div>
+                <div class="tile border">
+                    <p>nothing</p>
+                </div>
+                <div class="tile border">
+                    <p>nothing</p>
+                </div>
+                <div id="t8" class="tile border">
+                    <p>8</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="t4" class="tile border">
+                    <p>4</p>
+                </div>
+                <div id="t5" class="tile border">
+                    <p>5</p>
+                </div>
+                <div id="t6" class="tile border">
+                    <p>6</p>
+                </div>
+                <div id="t7" class="tile border">
+                    <p>7</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div id="buttonDiv">
+                <div class="row">
+                    <button id="rollButton" class="btn btn-primary">Roll!</button>
+                    <h5 id="rollNumber">num</h5>
+                </div>
+            </div>
+        </div>
+
+        <script src="/js/jquery-2.2.4.js"></script>
+        <script src="/js/game.js"></script>
+</body>
+
+</html>

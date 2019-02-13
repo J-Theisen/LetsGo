@@ -13,11 +13,13 @@ public class GamePlayer {
     @Id
     private int id;
     private int gameId;
-    @NotBlank
+    @NotBlank(message="Player Name cannot be empty!")
     @Size(max = 20, message = "PlayerName cannot be greater than 20 characters.")
     private String playerName;
     private int playerCurrency;
     private int playerCharacter;
+    private int playerTurn;
+    private String imageUrl;
 
     public int getId() {
         return id;
@@ -58,6 +60,24 @@ public class GamePlayer {
     public void setPlayerCharacter(int playerCharacter) {
         this.playerCharacter = playerCharacter;
     }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public void setPlayerTurn(int playerTurn) {
+        this.playerTurn = playerTurn;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
+    
 
     @Override
     public int hashCode() {

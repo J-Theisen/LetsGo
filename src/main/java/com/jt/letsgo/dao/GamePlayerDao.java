@@ -9,5 +9,7 @@ public interface GamePlayerDao {
     GamePlayer addPlayerToGame(GamePlayer gp);
     GamePlayer getPlayer(int gameId, String playerName);
     List<GamePlayer> getAllPlayersForGame(int gameId);
-    GamePlayer updateGamePlayer();
+    GamePlayer updateGamePlayerCurrency(GamePlayer gp);
+    GamePlayer updateGamePlayerCharacter(GamePlayer gp);
+    GamePlayer updateTurnNumber(GamePlayer gp);
 }

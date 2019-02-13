@@ -24,6 +24,12 @@ public class GameDaoDBTest {
 
     @Before
     public void setUp() {
+        final String DELETE_MOVES = "DELETE FROM Move";
+        jdbc.update(DELETE_MOVES);
+        
+        final String DELETE_BOARDTILES = "DELETE FROM BoardTile";
+        jdbc.update(DELETE_BOARDTILES);
+        
         final String DELETE_GAMES = "DELETE FROM Game";
         jdbc.update(DELETE_GAMES);
     }
@@ -50,9 +56,6 @@ public class GameDaoDBTest {
         assertTrue(gamesForUser.size() == 2);
     }
 
-    /**
-     * Test of updateGame method, of class GameDaoDB.
-     */
     @Test
     public void testUpdateGame() {
         Game game = new Game();
@@ -69,6 +72,21 @@ public class GameDaoDBTest {
         Game gameToCheck = gamesList.get(0);
         
         assertTrue(gameToCheck.getEndTime().isAfter(LocalDateTime.of(1900, 1, 1, 0, 0, 0)));
+        
+    }
+    
+    @Test
+    public void testGetGameById(){
+        Game game = new Game();
+        game.setGameLeader("Jordan");
+        game.setStartTime(LocalDateTime.now());
+        dao.createNewGame(game);
+        
+        List<Game> gamesList = dao.getGamesByUsername("Jordan");
+        
+        Game gameToCheckOne = gamesList.get(0);
+        Game gameToCheckTwo = dao.getGameById(gameToCheckOne.getGameId());
+        assertTrue(gameToCheckOne.getGameId()==gameToCheckTwo.getGameId());
         
     }
 

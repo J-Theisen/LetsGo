@@ -1,17 +1,77 @@
 <!DOCTYPE html>
-<html lang="en xmlns:th=" http://www.thymeleaf.org""> <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Lets Go!</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
+<html lang="en xmlns:th=" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lets Go!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
-   
-    <h1>LETS GET IT</h1>
+    <div class="row">
+
+        <div class="col-md-3">
+            <div id="playerTableDiv" class="container">
+                <table id="playerTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Players Added to Game</th>
+                        </tr>
+                    </thead>
+                    <tr th:each="gamePlayer : ${players}">
+                        <td>
+                            <p th:text="${gamePlayer.playerName}">test</p>
+                        </td>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="addPlayerInfoDiv" class="col-md-6">
+            <div class="container">
+                <div class="row">
+                    <h1>Add Player</h1>
+                </div>
+                <form method="POST">
+                    <div class="row">
+                        <div th:if='${players.size()}<4'>
+                            <label class="label label-primary" for="playerName">
+                                <p> Player Name: </p>
+                            </label>
+                            <input id="playerName" class="form-control" name="playerName" type="text" size="35">
+                            <div th:if="${#fields.hasErrors('gamePlayer.playerName')}">
+                            <p th:each="error : ${#fields.errors('gamePlayer.playerName')}" class="alert alert-danger" th:text="${error}"></p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row"  th:if='${players.size()}<4'>
+                        <button name="joinButton" id="joinButton" class="btn btn-primary" type="submit">Join</button>
+                    </div>
+                    <div class="row">
+                            <a href="/" class="btn btn-danger">Cancel</a>
+                    </div>
+
+                </form>
+                <div class="row">
+                    <div id="beginGameButton" th:if='${players.size()}>1'</div>
+                        <a href="/" th:href="@{/game/{username}/{gameId}(username=${gameLeader},gameId=${gameId})}"
+                            class="btn btn-primary">Begin!</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="container">
+                <h1></h1>
+            </div>
+        </div>
+    </div>
     <script src="/js/jquery-2.2.4.js"></script>
+    <script src="/js/game.js"></script>
 </body>
 
 </html>
