@@ -5,7 +5,7 @@ import com.jt.letsgo.dto.GamePlayer;
 import com.jt.letsgo.dto.Player;
 import com.jt.letsgo.service.BoardTileService;
 import com.jt.letsgo.service.GamePlayerService;
-import com.jt.letsgo.service.NewGameService;
+import com.jt.letsgo.service.GameService;
 import com.jt.letsgo.service.PlayerService;
 import java.util.List;
 import javax.validation.Valid;
@@ -24,7 +24,7 @@ public class NewGameController {
     private PlayerService players;
 
     @Autowired
-    private NewGameService gameService;
+    private GameService gameService;
 
     @Autowired
     GamePlayerService gpService;

@@ -6,9 +6,11 @@ import java.util.List;
 
 
 
-public interface NewGameDao {
+public interface GameDao {
     Game createNewGame(Game game);
     List<Game> getGamesByUsername(String username);
     Game getGameById(int gameId);
     Game updateGameOver(Game game);
+    Game updateGameStarted(Game game);
+    Game updateGame(Game game);
 }

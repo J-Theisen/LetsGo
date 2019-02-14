@@ -20,6 +20,8 @@ public class GamePlayer {
     private int playerCharacter;
     private int playerTurn;
     private String imageUrl;
+    private int spacesMoved;
+    private int currentTile;
 
     public int getId() {
         return id;
@@ -76,8 +78,22 @@ public class GamePlayer {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-    
-    
+
+    public int getSpacesMoved() {
+        return spacesMoved;
+    }
+
+    public void setSpacesMoved(int spacesMoved) {
+        this.spacesMoved = spacesMoved;
+    }
+
+    public int getCurrentTile() {
+        return currentTile;
+    }
+
+    public void setCurrentTile(int currentTile) {
+        this.currentTile = currentTile;
+    }
 
     @Override
     public int hashCode() {

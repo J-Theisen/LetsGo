@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public class GameDaoDB implements NewGameDao {
+public class GameDaoDB implements GameDao {
 
     @Autowired
     JdbcTemplate jdbc;
@@ -43,20 +43,36 @@ public class GameDaoDB implements NewGameDao {
     }
 
     @Override
+    public Game getGameById(int gameId) {
+        final String GET_GAME_BY_ID = "SELECT * FROM Game WHERE GameId = ?";
+        return jdbc.queryForObject(GET_GAME_BY_ID, new GameMapper(), gameId);
+    }
+
+    @Override
     public Game updateGameOver(Game game) {
         final String UPDATE_GAME = "UPDATE Game SET EndTime = ? WHERE GameId = ?";
         LocalDateTime endTime = LocalDateTime.now();
         jdbc.update(UPDATE_GAME,
                 endTime,
                 game.getGameId());
-        return game;
+         return getGameById(game.getGameId());
     }
 
     @Override
-    public Game getGameById(int gameId) {
-        final String GET_GAME_BY_ID = "SELECT * FROM Game WHERE GameId = ?";
-        return jdbc.queryForObject(GET_GAME_BY_ID, new GameMapper(), gameId);
+    public Game updateGameStarted(Game game) {
+        final String UPDATE_GAME_OVER = "UPDATE Game SET GameStarted = 1 WHERE GameId = ?";
+        jdbc.update(UPDATE_GAME_OVER, game.getGameId());
+         return getGameById(game.getGameId());
     }
+
+    @Override
+    public Game updateGame(Game game) {
+         final String UPDATE_GAME_OVER = "UPDATE Game SET PlayerTurn = ? WHERE GameId = ?";
+         jdbc.update(UPDATE_GAME_OVER, game.getPlayerTurn(), game.getGameId());
+         return getGameById(game.getGameId());
+    }
+    
+    
 
     public static final class GameMapper implements RowMapper<Game> {
 
@@ -68,6 +84,8 @@ public class GameDaoDB implements NewGameDao {
             game.setGameLeader(rs.getString("GameLeader"));
             game.setStartTime(rs.getTimestamp("StartTime").toLocalDateTime());
             game.setEndTime(rs.getTimestamp("EndTime").toLocalDateTime());
+            game.setGameStarted(rs.getInt("GameStarted"));
+            game.setPlayerTurn(rs.getInt("PlayerTurn"));
             return game;
         }
     }

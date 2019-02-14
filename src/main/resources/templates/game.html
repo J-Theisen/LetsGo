@@ -26,46 +26,45 @@
                             <th>Monies</th>
                         </tr>
                     </thead>
-                    <tr th:each="gamePlayer : ${players}">
-                        <td>
-                                <p th:text="${gamePlayer.playerTurn}"></p>
-                        </td>
-                        <td>
-                            <p th:text="${gamePlayer.playerName}"></p>
-                        </td>
-                        <td>
-                            <p th:text="${gamePlayer.playerCurrency}"></p>
-                        </td>
-                        </tbody>
+                    <tbody>
+                        <tr th:each="gamePlayer : ${players}">
+                            <td>
+                                <p th:text="${gamePlayer.playerTurn}" th:data-playerId="${gamePlayer.id}" th:data-playerTurn="${gamePlayer.playerTurn}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${gamePlayer.playerName}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${gamePlayer.playerCurrency}"></p>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
 
+        <input type="hidden" id="playerTurn" th:value="${game.playerTurn}">
+        <input type="hidden" id="numPlayers" th:value="${players.size()}">
+
         <div id="gameContainer" class="container col-md-9">
             <div class="row">
                 <div id="t1" class="tile border">
-                    <span id="startSpan">
-                        <h6>Start</h6>
-                        <p>1</p>
-                    </span>
-                    <!-- <div id="ghostDiv" class="ghost">
-                        <img id="ghostImg" src="/images/sq.png">
-                    </div> -->
+
                 </div>
                 <div id="t12" class="tile border">
-                    <p>12</p>
+
                 </div>
                 <div id="t11" class="tile border">
-                    <p>11</p>
+
                 </div>
                 <div id="t10" class="tile border">
-                    <p>10</p>
+
                 </div>
             </div>
 
             <div class="row">
                 <div id="t2" class="tile border">
-                    <p>2</p>
+
                 </div>
                 <div class="tile border">
                     <p>nothing</p>
@@ -74,13 +73,13 @@
                     <p>nothing</p>
                 </div>
                 <div id="t9" class="tile border">
-                    <p>9</p>
+
                 </div>
             </div>
 
             <div class="row">
                 <div id="t3" class="tile border">
-                    <p>3</p>
+
                 </div>
                 <div class="tile border">
                     <p>nothing</p>
@@ -89,22 +88,22 @@
                     <p>nothing</p>
                 </div>
                 <div id="t8" class="tile border">
-                    <p>8</p>
+
                 </div>
             </div>
 
             <div class="row">
                 <div id="t4" class="tile border">
-                    <p>4</p>
+
                 </div>
                 <div id="t5" class="tile border">
-                    <p>5</p>
+
                 </div>
                 <div id="t6" class="tile border">
-                    <p>6</p>
+
                 </div>
                 <div id="t7" class="tile border">
-                    <p>7</p>
+
                 </div>
             </div>
 
@@ -113,7 +112,7 @@
             <div id="buttonDiv">
                 <div class="row">
                     <button id="rollButton" class="btn btn-primary">Roll!</button>
-                    <h5 id="rollNumber">num</h5>
+                    <h5 id="rollNumber">Roll!</h5>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ public class GameDaoDBTest {
     JdbcTemplate jdbc;
 
     @Autowired
-    NewGameDao dao;
+    GameDao dao;
 
     @Before
     public void setUp() {
@@ -87,6 +87,25 @@ public class GameDaoDBTest {
         Game gameToCheckOne = gamesList.get(0);
         Game gameToCheckTwo = dao.getGameById(gameToCheckOne.getGameId());
         assertTrue(gameToCheckOne.getGameId()==gameToCheckTwo.getGameId());
+    }
+    
+    @Test 
+    public void testUpdateGameStarted(){
+        Game game = new Game();
+        game.setGameLeader("Jordan");
+        game.setStartTime(LocalDateTime.now());
+        dao.createNewGame(game);
+        
+        List<Game> gamesForUser = dao.getGamesByUsername("Jordan");
+        game = gamesForUser.get(0);
+        
+        assertTrue(gamesForUser.size() == 1);
+        
+        dao.updateGameStarted(game);
+        List<Game> gamesList = dao.getGamesByUsername("Jordan");
+        Game gameToCheck = gamesList.get(0);
+        
+        assertTrue(gameToCheck.isGameStarted() == 1);
         
     }
 

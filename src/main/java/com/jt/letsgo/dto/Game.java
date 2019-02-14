@@ -1,4 +1,3 @@
-
 package com.jt.letsgo.dto;
 
 import java.time.LocalDateTime;
@@ -8,13 +7,15 @@ import javax.persistence.Id;
 
 @Entity
 public class Game {
-    
+
     @Id
     private int gameId;
     private String gameLeader;
     private int boardId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private int gameStarted;
+    private int playerTurn;
 
     public int getGameId() {
         return gameId;
@@ -51,9 +52,25 @@ public class Game {
     public LocalDateTime getEndTime() {
         return endTime;
     }
-
-    public void setEndTime(LocalDateTime endTime) {
+    
+     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+    }
+
+    public int isGameStarted() {
+        return gameStarted;
+    }
+
+    public void setGameStarted(int gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public void setPlayerTurn(int playerTurn) {
+        this.playerTurn = playerTurn;
     }
 
     @Override
@@ -96,4 +113,5 @@ public class Game {
         }
         return true;
     }
+
 }

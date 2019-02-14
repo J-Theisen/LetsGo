@@ -5,7 +5,7 @@ import com.jt.letsgo.dto.BoardTile;
 import com.jt.letsgo.dto.GamePlayer;
 import com.jt.letsgo.service.BoardTileService;
 import com.jt.letsgo.service.GamePlayerService;
-import com.jt.letsgo.service.NewGameService;
+import com.jt.letsgo.service.GameService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestGameController {
     
     @Autowired
-    NewGameService gameService;
+    GameService gameService;
     
     @Autowired
     BoardTileService btService;
@@ -37,4 +37,9 @@ public class RestGameController {
         List<GamePlayer> players = gpService.getAllPlayersForGame(gameId);
         return players;
     }
+    
+//    @PutMapping("")
+//    public updateGamePlayerTurn(){
+//        
+//    }
 }

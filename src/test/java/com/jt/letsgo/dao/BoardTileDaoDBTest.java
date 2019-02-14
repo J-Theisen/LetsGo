@@ -21,7 +21,7 @@ public class BoardTileDaoDBTest {
     JdbcTemplate jdbc;
     
     @Autowired
-    NewGameDao gameDao;
+    GameDao gameDao;
     
     @Autowired
     BoardTileDao btDao;

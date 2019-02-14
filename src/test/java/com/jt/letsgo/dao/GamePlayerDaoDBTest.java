@@ -25,7 +25,7 @@ public class GamePlayerDaoDBTest {
     GamePlayerDao dao;
     
     @Autowired 
-    NewGameDao gameDao;
+    GameDao gameDao;
     
     Game game;
 

@@ -1,8 +1,8 @@
 package com.jt.letsgo.service;
 
 import com.jt.letsgo.dao.GamePlayerDao;
+import com.jt.letsgo.dto.Game;
 import com.jt.letsgo.dto.GamePlayer;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GamePlayerService {
-    
+
     @Autowired
     GamePlayerDao gpDao;
-    
+
+    @Autowired
+    GameService gameDao;
+
     public GamePlayer addPlayerToGame(String username, int gameId) {
         // Check and see if playerName is not empt
         GamePlayer gp = new GamePlayer();
@@ -21,58 +24,70 @@ public class GamePlayerService {
         gp.setGameId(gameId);
         return gpDao.addPlayerToGame(gp);
     }
-    
+
     public GamePlayer getPlayer(int gameId, String playerName) {
         return gpDao.getPlayer(gameId, playerName);
     }
-    
+
     public List<GamePlayer> getAllPlayersForGame(int gameId) {
         return gpDao.getAllPlayersForGame(gameId);
     }
-    
+
     public GamePlayer updateGamePlayerCurrency(GamePlayer gp) {
         return gpDao.updateGamePlayerCurrency(gp);
     }
-    
+
     public GamePlayer updateGamePlayerCharacter(GamePlayer gp) {
         return gpDao.updateGamePlayerCharacter(gp);
     }
-    
-    public List<GamePlayer> updatePlayerCharactersAndTurnNumber(int gameId, List<GamePlayer> players){
-        int counter = 1;
-        int numPlayers = players.size();
-        int[] turnNumbers = new int[numPlayers];
-        for(GamePlayer gp : players){
-            gp.setPlayerCharacter(counter);
-            
-            if(counter==1){
-                gp.setImageUrl("/images/sq.png");
-            }else if(counter==2){
-                gp.setImageUrl("/images/dog.png");
-            } else if(counter==3){
-                gp.setImageUrl("/images/cat.png");
-            }else {
-                gp.setImageUrl("/images/bird.png");
+
+    public Game updatePlayerCharactersAndTurnNumber(int gameId, List<GamePlayer> players) {
+        Game game = gameDao.getGameById(gameId);
+        int isGameStarted = game.isGameStarted();
+
+        if (isGameStarted == 0) {
+
+            int counter = 1;
+            int numPlayers = players.size();
+            int[] turnNumbers = new int[numPlayers];
+            for (GamePlayer gp : players) {
+                //Sets the 
+                gp.setPlayerCharacter(counter);
+
+                if (counter == 1) {
+                    gp.setImageUrl("/images/squirrel.png");
+                } else if (counter == 2) {
+                    gp.setImageUrl("/images/dog.png");
+                } else if (counter == 3) {
+                    gp.setImageUrl("/images/cat.png");
+                } else {
+                    gp.setImageUrl("/images/bird.png");
+                }
+
+                gpDao.updateGamePlayerCharacter(gp);
+                turnNumbers[counter - 1] = counter;
+                counter++;
+                
+                gameDao.updateGameStarted(game);
             }
-            
-            gpDao.updateGamePlayerCharacter(gp);
-            turnNumbers[counter-1] = counter;
-            counter++;
-        }
-        
-        shufflePlayerTurnArray(turnNumbers);
-        
-        int arrayCounter = 0;
-        for(GamePlayer gp : players){
-            gp.setPlayerTurn(turnNumbers[arrayCounter]);
-            gpDao.updateTurnNumber(gp);
-            arrayCounter++;
-        }
-        
-        return gpDao.getAllPlayersForGame(gameId);
+
+            shufflePlayerTurnArray(turnNumbers);
+
+            int arrayCounter = 0;
+            for (GamePlayer gp : players) {
+                gp.setPlayerTurn(turnNumbers[arrayCounter]);
+                gpDao.updateTurnNumber(gp);
+                arrayCounter++;
+            }
+        } 
+        return game;
     }
     
-     public static void shufflePlayerTurnArray(int[] playerTurnArray) {
+    public GamePlayer updateGamePlayer(GamePlayer gp){
+        return gpDao.updateGamePlayer(gp);
+    }
+
+    public static void shufflePlayerTurnArray(int[] playerTurnArray) {
         int n = playerTurnArray.length;
         Random random = new Random();
         random.nextInt();

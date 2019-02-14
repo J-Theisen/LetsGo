@@ -12,4 +12,5 @@ public interface GamePlayerDao {
     GamePlayer updateGamePlayerCurrency(GamePlayer gp);
     GamePlayer updateGamePlayerCharacter(GamePlayer gp);
     GamePlayer updateTurnNumber(GamePlayer gp);
+    GamePlayer updateGamePlayer(GamePlayer gp);
 }

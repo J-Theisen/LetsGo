@@ -27,7 +27,8 @@ public class GameController {
     public String game(@PathVariable String username, @PathVariable String gameIdString, Model model) {
         List<GamePlayer> players = gpService.getAllPlayersForGame(Integer.parseInt(gameIdString));
         model.addAttribute("players", players);
-        gpService.updatePlayerCharactersAndTurnNumber(Integer.parseInt(gameIdString), players);
+        model.addAttribute("game", gpService.updatePlayerCharactersAndTurnNumber(Integer.parseInt(gameIdString), players));
+
         return "game";
     }
 }

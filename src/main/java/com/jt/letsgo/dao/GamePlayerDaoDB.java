@@ -46,14 +46,21 @@ public class GamePlayerDaoDB implements GamePlayerDao {
     @Override
     public GamePlayer updateGamePlayerCharacter(GamePlayer gp) {
         final String UPDATE_PLAYER = "UPDATE GamePlayer SET PlayerCharacter = ?, ImgUrl = ? WHERE GameId = ? AND PlayerName = ?";
-        jdbc.update(UPDATE_PLAYER, gp.getPlayerCharacter(), gp.getImageUrl(),gp.getGameId(), gp.getPlayerName());
+        jdbc.update(UPDATE_PLAYER, gp.getPlayerCharacter(), gp.getImageUrl(), gp.getGameId(), gp.getPlayerName());
         return gp;
     }
-    
+
     @Override
-    public GamePlayer updateTurnNumber(GamePlayer gp){
+    public GamePlayer updateTurnNumber(GamePlayer gp) {
         final String UPDATE_PLAYER_TURN = "UPDATE GamePlayer SET PlayerTurn = ? WHERE GameId = ? AND PlayerName = ?";
         jdbc.update(UPDATE_PLAYER_TURN, gp.getPlayerTurn(), gp.getGameId(), gp.getPlayerName());
+        return gp;
+    }
+
+    @Override
+    public GamePlayer updateGamePlayer(GamePlayer gp) {
+        final String UPDATE_GAME_PLAYER = "UPDATE GamePlayer SET PlayerCurrency = ?, SpacesMoved = ?, CurrentTile = ? WHERE GameId = ? AND PlayerName = ?";
+        jdbc.update(UPDATE_GAME_PLAYER, gp.getPlayerCurrency(), gp.getSpacesMoved(), gp.getCurrentTile(), gp.getGameId(), gp.getPlayerName());
         return gp;
     }
 
@@ -69,6 +76,8 @@ public class GamePlayerDaoDB implements GamePlayerDao {
             gp.setPlayerCharacter(rs.getInt("PlayerCharacter"));
             gp.setPlayerTurn(rs.getInt("PlayerTurn"));
             gp.setImageUrl(rs.getString("ImgUrl"));
+            gp.setCurrentTile(rs.getInt("CurrentTile"));
+            gp.setSpacesMoved(rs.getInt("SpacesMoved"));
             return gp;
         }
     }
