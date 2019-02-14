@@ -52,29 +52,37 @@ function loadCharactersOnBoard() {
             var p3Position;
             var p4Position;
 
+            var p1Turn;
+            var p2Turn;
+            var p3Turn;
+            var p4Turn;
+
             $.each(playerArray, function (index, player) {
                 var playerTurn = player.playerTurn;
                 var playerImage = player.imageUrl
                 if (playerTurn === 1) {
                     p1Position = player.currentTile;
+                    p1Turn = player.playerTurn;
                     div1 = '<div id="player' + playerTurn + '" ><p>' + player.playerName + '</p>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
                 } else if (playerTurn === 2) {
                     p2Position = player.currentTile;
+                    p2Turn = player.playerTurn;
                     div2 = '<div id="player' + playerTurn + '" ><p>' + player.playerName + '</p>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
                 } else if (playerTurn === 3) {
                     p3Position = player.currentTile;
+                    p3Turn = player.playerTurn;
                     div3 = '<div id="player' + playerTurn + '" ><p>' + player.playerName + '</p>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
                 } else if (playerTurn === 4) {
                     p4Position = player.currentTile;
+                    p4Turn = player.playerTurn;
                     div4 = '<div id="player' + playerTurn + '" ><p>' + player.playerName + '</p>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
                 }
             });
 
-            $('#t' + p4Position).append(div4);
-            $('#t' + p3Position).append(div3);
-            $('#t' + p2Position).append(div2);
-            $('#t' + p1Position).append(div1);
-
+            $('#s' + p4Position+ p4Turn).append(div4);
+            $('#s' + p3Position+ p3Turn).append(div3);
+            $('#s' + p2Position + p2Turn).append(div2);
+            $('#s' + p1Position + p1Turn).append(div1);
         },
         error: function () {
             alert("FAILURE");
@@ -100,9 +108,6 @@ $('#rollButton').on('click', function () {
     var p = $('p[data-playerTurn=' + playerTurn + ']');
     var playerId = p.data('playerid') * 1;
 
-
-
-
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/api/get-game-player/' + gameIdSplit + '/' + playerTurn,
@@ -124,8 +129,9 @@ $('#rollButton').on('click', function () {
                 playerPosition = playerPosition - 12;
             }
 
-            $('#t' + playerPosition).append($('#player' + player.playerTurn));
-
+            $('#s' + playerPosition + player.playerTurn).append($('#player' + player.playerTurn));
+            
+            //Updates the players position and total moves.
             $.ajax({
                 type: "PUT",
                 url: "http://localhost:8080/api/game-player",

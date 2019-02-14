@@ -20,12 +20,12 @@ public class BoardTileService {
         BoardTile bt = new BoardTile();;
         Random random = new Random();
         for(int i = 1; i <= numTiles; i++){
-           int randomNum = random.nextInt(9)+1;
+           int randomNum = random.nextInt(99)+1;
            bt.setBoardTileId(i);
            bt.setBoardId(gameId);
-           if(randomNum <= 5){
+           if(randomNum <= 50){
                bt.setTileType("BLUE");
-           } else if(randomNum >= 6 && randomNum <= 10){
+           } else if(randomNum >= 60 && randomNum <= 100){
                bt.setTileType("RED");
            } //else {
                //bt.setTileType("GREEN");
