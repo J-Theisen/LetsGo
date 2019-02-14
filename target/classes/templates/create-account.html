@@ -39,7 +39,9 @@
                 <div th:if="${#fields.hasErrors('player.firstName')}">
                     <p th:each="error : ${#fields.errors('player.firstName')}" class="alert alert-danger" th:text="${error}"></p>
                 </div>
+            </div>
 
+            <div class="row">
                 <label for="lastName">
                     <h6>Last Name:</h6>
                 </label>
@@ -49,15 +51,16 @@
                 </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
                 <label for="email">
                     <h6>Email:</h6>
                 </label>
-                <input id="email" name="playerEmail" type="email" class="form-control">
+                <input id="email" name="playerEmail" type="text" class="form-control" >
                 <div th:if="${#fields.hasErrors('player.playerEmail')}">
                     <p th:each="error : ${#fields.errors('player.playerEmail')}" class="alert alert-danger" th:text="${error}"></p>
                 </div>
-
+            </div> -->
+            <div class="row">
                 <label for="password">
                     <h6>Password:</h6>
                 </label>

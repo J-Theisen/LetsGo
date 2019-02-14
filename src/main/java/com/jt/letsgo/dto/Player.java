@@ -22,8 +22,6 @@ public class Player {
     @Size(max = 20, message = "Last name must be less than 20 characters.")
     private String lastName;
 
-    @NotBlank(message = "Email must not be empty.")
-    @Size(max = 30, message = "Email must be less than 30 characters.")
     private String playerEmail;
 
     @NotBlank(message = "Password must not be empty.")

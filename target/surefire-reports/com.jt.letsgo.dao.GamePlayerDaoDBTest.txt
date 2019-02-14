@@ -1,4 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: com.jt.letsgo.dao.GamePlayerDaoDBTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.377 s - in com.jt.letsgo.dao.GamePlayerDaoDBTest
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.059 s <<< FAILURE! - in com.jt.letsgo.dao.GamePlayerDaoDBTest
+testUpdateGamePlayer(com.jt.letsgo.dao.GamePlayerDaoDBTest)  Time elapsed: 0.04 s  <<< ERROR!
+org.springframework.jdbc.UncategorizedSQLException: PreparedStatementCallback; uncategorized SQLException for SQL [SELECT * FROM GamePlayer WHERE GameId = ? AND PlayerName = ?]; SQL state [S0022]; error code [0]; Column 'CurrentTile' not found.; nested exception is java.sql.SQLException: Column 'CurrentTile' not found.
+	at com.jt.letsgo.dao.GamePlayerDaoDBTest.testUpdateGamePlayer(GamePlayerDaoDBTest.java:69)
+Caused by: java.sql.SQLException: Column 'CurrentTile' not found.
+	at com.jt.letsgo.dao.GamePlayerDaoDBTest.testUpdateGamePlayer(GamePlayerDaoDBTest.java:69)
+
+testAddPlayerToGameGetPlayerGetAllPlayers(com.jt.letsgo.dao.GamePlayerDaoDBTest)  Time elapsed: 0.015 s  <<< ERROR!
+org.springframework.jdbc.UncategorizedSQLException: PreparedStatementCallback; uncategorized SQLException for SQL [SELECT * FROM GamePlayer WHERE GameId = ? AND PlayerName = ?]; SQL state [S0022]; error code [0]; Column 'CurrentTile' not found.; nested exception is java.sql.SQLException: Column 'CurrentTile' not found.
+	at com.jt.letsgo.dao.GamePlayerDaoDBTest.testAddPlayerToGameGetPlayerGetAllPlayers(GamePlayerDaoDBTest.java:50)
+Caused by: java.sql.SQLException: Column 'CurrentTile' not found.
+	at com.jt.letsgo.dao.GamePlayerDaoDBTest.testAddPlayerToGameGetPlayerGetAllPlayers(GamePlayerDaoDBTest.java:50)
+

@@ -94,7 +94,7 @@ function highlightCurrentPlayer() {
     $('tr').css("background-color", "white");
     var playerTurn = $('#playerTurn').val() * 1;
     var p = $('h4[data-playerTurn=' + playerTurn + ']');
-    p.parent().parent().css("background-color", "red");
+    p.parent().parent().css("background-color", "rgb(64, 255, 47)");
 }
 
 highlightCurrentPlayer();

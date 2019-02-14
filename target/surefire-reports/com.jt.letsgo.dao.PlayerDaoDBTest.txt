@@ -1,4 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: com.jt.letsgo.dao.PlayerDaoDBTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.041 s - in com.jt.letsgo.dao.PlayerDaoDBTest
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.502 s <<< FAILURE! - in com.jt.letsgo.dao.PlayerDaoDBTest
+testCreatePlayerGetPlayerByUsername(com.jt.letsgo.dao.PlayerDaoDBTest)  Time elapsed: 0 s  <<< ERROR!
+org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [INSERT INTO Player(Username, FirstName, LastName, PlayerPassword) VALUES(?, ?, ?, ?, ?)]; nested exception is java.sql.SQLException: No value specified for parameter 5
+	at com.jt.letsgo.dao.PlayerDaoDBTest.testCreatePlayerGetPlayerByUsername(PlayerDaoDBTest.java:39)
+Caused by: java.sql.SQLException: No value specified for parameter 5
+	at com.jt.letsgo.dao.PlayerDaoDBTest.testCreatePlayerGetPlayerByUsername(PlayerDaoDBTest.java:39)
+
+testUpdatePlayer(com.jt.letsgo.dao.PlayerDaoDBTest)  Time elapsed: 0 s  <<< ERROR!
+org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [INSERT INTO Player(Username, FirstName, LastName, PlayerPassword) VALUES(?, ?, ?, ?, ?)]; nested exception is java.sql.SQLException: No value specified for parameter 5
+	at com.jt.letsgo.dao.PlayerDaoDBTest.testUpdatePlayer(PlayerDaoDBTest.java:56)
+Caused by: java.sql.SQLException: No value specified for parameter 5
+	at com.jt.letsgo.dao.PlayerDaoDBTest.testUpdatePlayer(PlayerDaoDBTest.java:56)
+

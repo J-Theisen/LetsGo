@@ -1,1 +1,4 @@
+com\jt\letsgo\dao\GameDaoDBTest.class
 com\jt\letsgo\dao\PlayerDaoDBTest.class
+com\jt\letsgo\dao\GamePlayerDaoDBTest.class
+com\jt\letsgo\dao\BoardTileDaoDBTest.class

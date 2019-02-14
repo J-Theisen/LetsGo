@@ -1,4 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: com.jt.letsgo.dao.GameDaoDBTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.749 s - in com.jt.letsgo.dao.GameDaoDBTest
+Tests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.168 s <<< FAILURE! - in com.jt.letsgo.dao.GameDaoDBTest
+testUpdateGameStarted(com.jt.letsgo.dao.GameDaoDBTest)  Time elapsed: 0.118 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.jt.letsgo.dao.GameDaoDBTest.testUpdateGameStarted(GameDaoDBTest.java:100)
+
+testUpdateGame(com.jt.letsgo.dao.GameDaoDBTest)  Time elapsed: 0.02 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.jt.letsgo.dao.GameDaoDBTest.testUpdateGame(GameDaoDBTest.java:66)
+
+testGetGameById(com.jt.letsgo.dao.GameDaoDBTest)  Time elapsed: 0.016 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.jt.letsgo.dao.GameDaoDBTest.testGetGameById(GameDaoDBTest.java:87)
+
+testCreateNewGameGetGamesByUser(com.jt.letsgo.dao.GameDaoDBTest)  Time elapsed: 0.011 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.jt.letsgo.dao.GameDaoDBTest.testCreateNewGameGetGamesByUser(GameDaoDBTest.java:48)
+

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,14 +70,24 @@ public class NewGameController {
             List<GamePlayer> players = gpService.getAllPlayersForGame(Integer.parseInt(gameIdString));
             model.addAttribute("players", players);
             return "add-player";
-        } else {
-            gpService.addPlayerToGame(playerName, Integer.parseInt(gameIdString));
-            List<GamePlayer> players = gpService.getAllPlayersForGame(Integer.parseInt(gameIdString));
-            model.addAttribute("players", players);
-            model.addAttribute("gameId", gameIdString);
-            model.addAttribute("gameLeader", username);
-            return "add-player";
         }
+
+        List<GamePlayer> playersToCheck = gpService.getAllPlayersForGame(Integer.parseInt(gameIdString));
+        for (GamePlayer p : playersToCheck) {
+            if (p.getPlayerName().equals(playerName)) {
+                List<GamePlayer> players = gpService.getAllPlayersForGame(Integer.parseInt(gameIdString));
+                model.addAttribute("players", players);
+                return "add-player";
+            }
+        }
+
+        gpService.addPlayerToGame(playerName, Integer.parseInt(gameIdString));
+        List<GamePlayer> players = gpService.getAllPlayersForGame(Integer.parseInt(gameIdString));
+        model.addAttribute("players", players);
+        model.addAttribute("gameId", gameIdString);
+        model.addAttribute("gameLeader", username);
+        return "add-player";
+
     }
 
 }

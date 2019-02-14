@@ -38,7 +38,7 @@ p {
     border-radius: 25px;
     width: 125px;
     height: 125px;
-    background-color: greenyellow;
+    background-color: rgb(64, 255, 47);
 }
 
 .displayImage{
@@ -50,6 +50,17 @@ p {
 
 #rollRow, #homeButtonRow{
     margin-left:10px;
+}
+
+.tree{
+    transform: translate(80px, -100px) skew(-50deg); 
+    
+    
+}
+
+.treeImage{
+    width:100%;
+    height:100%;
 }
 
 #homeButtonDiv{
@@ -93,7 +104,7 @@ p {
 }
 
 #player2{
-    transform: translate(70px, -100px) skew(-50deg) ; 
+    transform: translate(70px, -100px) skew(-50deg); 
     animation: floatTwo 0.5s ease-in-out infinite; 
 }
 
