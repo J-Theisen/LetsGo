@@ -40,6 +40,16 @@ public class GamePlayerService {
     public GamePlayer updateGamePlayerCharacter(GamePlayer gp) {
         return gpDao.updateGamePlayerCharacter(gp);
     }
+    
+    public GamePlayer getPlayerByGameIdTurnNumber(int gameId, int turnNumber){
+        return gpDao.getPlayerByGameIdTurnNumber(gameId, turnNumber);
+    }
+    
+        
+    public GamePlayer updateGamePlayer(GamePlayer gp){
+        return gpDao.updateGamePlayer(gp);
+    }
+
 
     public Game updatePlayerCharactersAndTurnNumber(int gameId, List<GamePlayer> players) {
         Game game = gameDao.getGameById(gameId);
@@ -81,10 +91,6 @@ public class GamePlayerService {
             }
         } 
         return game;
-    }
-    
-    public GamePlayer updateGamePlayer(GamePlayer gp){
-        return gpDao.updateGamePlayer(gp);
     }
 
     public static void shufflePlayerTurnArray(int[] playerTurnArray) {

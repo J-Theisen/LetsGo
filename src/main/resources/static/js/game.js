@@ -11,7 +11,7 @@ function paintTiles() {
     var gameIdSplit = splitUrl[5];
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/api/game/' + gameIdSplit,
+        url: 'http://localhost:8080/api/getTiles/' + gameIdSplit,
         success: function (boardTileArray) {
 
             $.each(boardTileArray, function (index, boardTile) {
@@ -29,11 +29,14 @@ function paintTiles() {
         }
     });
 };
-
-function loadCharactersOnBoard() {
+function getGameIdFromUrl() {
     var pageUrl = window.location.href;
     var splitUrl = pageUrl.split("/");
     var gameIdSplit = splitUrl[5];
+    return gameIdSplit;
+}
+function loadCharactersOnBoard() {
+    var gameIdSplit = getGameIdFromUrl();
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/api/game/players/' + gameIdSplit,
@@ -79,8 +82,6 @@ function loadCharactersOnBoard() {
     });
 };
 
-
-
 function highlightCurrentPlayer() {
     $('tr').css("background-color", "white");
     var playerTurn = $('#playerTurn').val() * 1;
@@ -91,36 +92,89 @@ function highlightCurrentPlayer() {
 highlightCurrentPlayer();
 
 $('#rollButton').on('click', function () {
-    //Dice Roll
-    var min = 1;
-    var max = 4;
-    var rollNumber = Math.floor(Math.random() * (+max - +min)) + +min;
-    $('#rollNumber').text(rollNumber);
+
     //Grabbing whos turn it is and how many players there are for the game.
     var playerTurn = $('#playerTurn').val() * 1;
     var numPlayers = $('#numPlayers').val() * 1;
+    var gameIdSplit = getGameIdFromUrl();
+    var p = $('p[data-playerTurn=' + playerTurn + ']');
+    var playerId = p.data('playerid') * 1;
+
+
+
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/api/get-game-player/' + gameIdSplit + '/' + playerTurn,
+        success: function (player) {
+            //Where the player is at before the roll.
+            var playerPosition = player.currentTile;
+            var playerSpacesMoved = player.spacesMoved;
+
+            //Dice Roll
+            var min = 1;
+            var max = 4;
+            var rollNumber = Math.floor(Math.random() * (+max - +min)) + +min;
+            $('#rollNumber').text(rollNumber);
+
+            //var playerPositionStart = playerPosition;
+            playerPosition = playerPosition + rollNumber;
+            playerSpacesMoved += rollNumber;
+            if (playerPosition > 12) {
+                playerPosition = playerPosition - 12;
+            }
+
+            $('#t' + playerPosition).append($('#player' + player.playerTurn));
+
+            $.ajax({
+                type: "PUT",
+                url: "http://localhost:8080/api/game-player",
+                data: JSON.stringify({
+                    id: playerId,
+                    currentTile: playerPosition,
+                    spacesMoved: playerSpacesMoved
+                }),
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                success: function (gamePlayer) {
+
+                },
+                error: function () {
+                    alert("FAILURE PUT GAME PLAYER IN DB!");
+                }
+            });
+
+        },
+        error: function () {
+            alert("FAILURE GET GAME PLAYER");
+        }
+    });
 
     //nextPlayer
     playerTurn++;
     if (playerTurn > numPlayers) {
         playerTurn = 1;
     }
-
-    $('#playerTurn').val(playerTurn);
-    highlightCurrentPlayer();
-
-    return;
-    var min = 1;
-    var max = 4;
-    var rollNumber = Math.floor(Math.random() * (+max - +min)) + +min;
-    $('#rollNumber').text(rollNumber);
-    $('#t' + playerPosition).css('background-color', 'lightblue');
-    //var playerPositionStart = playerPosition;
-    playerPosition += rollNumber;
-    if (playerPosition > 12) {
-        playerPosition = playerPosition - 12;
-    }
-    $('#t' + playerPosition).append($('#ghostDiv'));
-    $('#t' + playerPosition).css({ 'background-color': 'lightgreen', 'transition': "background-color 2s ease" });
-    $().empty
+    //Uodates whos turn it is in game.
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8080/api/game",
+        data: JSON.stringify({
+            gameId: gameIdSplit,
+            playerTurn: playerTurn
+        }),
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        success: function (game) {
+            $('#playerTurn').val(game.playerTurn);
+            highlightCurrentPlayer();
+        },
+        error: function () {
+            alert("FAILURE UPDATE GAME WHOS UP!");
+        }
+    });
 });

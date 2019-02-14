@@ -23,20 +23,21 @@
                         <tr>
                             <th>Turn Number: </th>
                             <th>Players:</th>
-                            <th>Monies</th>
+                            <!-- <th>Monies</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="gamePlayer : ${players}">
                             <td>
-                                <p th:text="${gamePlayer.playerTurn}" th:data-playerId="${gamePlayer.id}" th:data-playerTurn="${gamePlayer.playerTurn}"></p>
+                                <p th:text="${gamePlayer.playerTurn}" th:data-playerid="${gamePlayer.id}"
+                                    th:data-playerTurn="${gamePlayer.playerTurn}"></p>
                             </td>
                             <td>
                                 <p th:text="${gamePlayer.playerName}"></p>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <p th:text="${gamePlayer.playerCurrency}"></p>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>
@@ -46,25 +47,41 @@
         <input type="hidden" id="playerTurn" th:value="${game.playerTurn}">
         <input type="hidden" id="numPlayers" th:value="${players.size()}">
 
+
         <div id="gameContainer" class="container col-md-9">
             <div class="row">
                 <div id="t1" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div id="t12" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div id="t11" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div id="t10" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
 
             <div class="row">
                 <div id="t2" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div class="tile border">
                     <p>nothing</p>
@@ -73,13 +90,19 @@
                     <p>nothing</p>
                 </div>
                 <div id="t9" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
 
             <div class="row">
                 <div id="t3" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div class="tile border">
                     <p>nothing</p>
@@ -88,22 +111,37 @@
                     <p>nothing</p>
                 </div>
                 <div id="t8" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
 
             <div class="row">
                 <div id="t4" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div id="t5" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div id="t6" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div id="t7" class="tile border">
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
 

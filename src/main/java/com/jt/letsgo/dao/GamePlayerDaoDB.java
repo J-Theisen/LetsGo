@@ -29,12 +29,20 @@ public class GamePlayerDaoDB implements GamePlayerDao {
         final String GET_PLAYER = "SELECT * FROM GamePlayer WHERE GameId = ? AND PlayerName = ?";
         return jdbc.queryForObject(GET_PLAYER, new GamePlayerMapper(), gameId, playerName);
     }
+    
+    @Override
+    public GamePlayer getPlayerByGameIdTurnNumber(int gameId, int turnNumber) {
+        final String GET_PLAYER = "SELECT * FROM GamePlayer WHERE GameId = ? AND PlayerTurn = ?";
+        return jdbc.queryForObject(GET_PLAYER, new GamePlayerMapper(), gameId, turnNumber);
+    }
 
     @Override
     public List<GamePlayer> getAllPlayersForGame(int gameId) {
         final String GET_ALL_PLAYERS_FOR_GAME = "SELECT * FROM GamePlayer WHERE GameId = ?";
         return jdbc.query(GET_ALL_PLAYERS_FOR_GAME, new GamePlayerMapper(), gameId);
     }
+    
+    
 
     @Override
     public GamePlayer updateGamePlayerCurrency(GamePlayer gp) {
@@ -49,6 +57,8 @@ public class GamePlayerDaoDB implements GamePlayerDao {
         jdbc.update(UPDATE_PLAYER, gp.getPlayerCharacter(), gp.getImageUrl(), gp.getGameId(), gp.getPlayerName());
         return gp;
     }
+    
+    
 
     @Override
     public GamePlayer updateTurnNumber(GamePlayer gp) {
@@ -59,8 +69,8 @@ public class GamePlayerDaoDB implements GamePlayerDao {
 
     @Override
     public GamePlayer updateGamePlayer(GamePlayer gp) {
-        final String UPDATE_GAME_PLAYER = "UPDATE GamePlayer SET PlayerCurrency = ?, SpacesMoved = ?, CurrentTile = ? WHERE GameId = ? AND PlayerName = ?";
-        jdbc.update(UPDATE_GAME_PLAYER, gp.getPlayerCurrency(), gp.getSpacesMoved(), gp.getCurrentTile(), gp.getGameId(), gp.getPlayerName());
+        final String UPDATE_GAME_PLAYER = "UPDATE GamePlayer SET PlayerCurrency = ?, SpacesMoved = ?, CurrentTile = ? WHERE Id = ?";
+        jdbc.update(UPDATE_GAME_PLAYER, gp.getPlayerCurrency(), gp.getSpacesMoved(), gp.getCurrentTile(), gp.getId());
         return gp;
     }
 

@@ -8,6 +8,7 @@ import java.util.List;
 public interface GamePlayerDao {
     GamePlayer addPlayerToGame(GamePlayer gp);
     GamePlayer getPlayer(int gameId, String playerName);
+    GamePlayer getPlayerByGameIdTurnNumber(int gameId, int turnNumber);
     List<GamePlayer> getAllPlayersForGame(int gameId);
     GamePlayer updateGamePlayerCurrency(GamePlayer gp);
     GamePlayer updateGamePlayerCharacter(GamePlayer gp);
