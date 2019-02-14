@@ -14,7 +14,7 @@ body {
         rotate rotates the board
         Skew is the main thing thatll angle the board how we want.
     */
-    transform:  translate(-50%, -50%)rotate(-40deg) skewX(30deg) skewY(10deg);
+    transform:  translate(-10%, -60%)rotate(-40deg) skewX(30deg) skewY(10deg);
 }
 
 #buttonDiv{
@@ -40,83 +40,79 @@ p {
     /* position : relative; */
 }
 
+.displayImage{
+    display:block;
+    margin:auto;
+    height: 50%x;
+    width: 50%;
+}
+
 #rollNumber{
     padding-left: 15px;
 }
 
 #player1Image {
+    display:block;
+    margin:auto;
     border:0;
     width: 80px;
     height:80px;
-    /* transform: translateY(30px);  */
-    /* transform: /*translate(30px, -100px) skew(-50deg) ;  */
+    animation: floatOne 0.8s ease-in-out infinite; 
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
 	 /* animation: float 6s ease-in-out infinite;  */
 }
 
 #player1{
-    /* width: 90px;
-    height: 90px; */
-    /* position: absolute; */
     transform: translate(70px, -100px) skew(-50deg); 
-    animation: floatOne 0.8s ease-in-out infinite;   
+      
 }
 
 
 #player2Image {
+    display:block;
+    margin:auto;
     border:0;
     width: 80px;
     height:80px;
-   
-    /* transform: translateY(30px);  */
-    /* transform: /*translate(30px, -125px) skew(-50deg) ; */
+
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
      /* animation: float 6s ease-in-out infinite;  */
       
 }
 
 #player2{
-    /* width: 90px;
-    height: 90px; */
-    /* position:absolute; */
-    transform: translate(85px, -100px) skew(-50deg) ; 
+    transform: translate(70px, -100px) skew(-50deg) ; 
     animation: floatTwo 0.5s ease-in-out infinite; 
 }
 
 #player3Image {
+    display:block;
+    margin:auto;
     border:0;
     width: 80px;
     height:80px;
-    /* transform: translateY(30px);  */
-    /* transform: /*translate(70%, -50%) skew(-50deg) ; */
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
     /* animation: float 6s ease-in-out infinite; */
       
 }
 
 #player3{
-    /* width: 90px;
-    height: 90px; */
-    /* position: absolute; */
     transform: translate(70px, -90px) skew(-50deg);  
     animation: floatThree 1s ease-in-out infinite;
 }
 
 #player4Image {
+    display:block;
+    margin:auto;
     border:0;
     width:80px;
     height:80px;
-
-    /* transform: translateY(30px);  */
-    /* transform: translate(70%, -40%) skew(-50deg) ; */
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
     /* animation: float 6s ease-in-out infinite; */
       
 }
 
 #player4{
-    /* width: 100px;
-    height: 100px; */
     transform: translate(70px, -90px) skew(-50deg);  
     animation: floatFour 0.3s ease-in-out infinite; 
 }

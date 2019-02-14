@@ -79,8 +79,8 @@ function loadCharactersOnBoard() {
                 }
             });
 
-            $('#s' + p4Position+ p4Turn).append(div4);
-            $('#s' + p3Position+ p3Turn).append(div3);
+            $('#s' + p4Position + p4Turn).append(div4);
+            $('#s' + p3Position + p3Turn).append(div3);
             $('#s' + p2Position + p2Turn).append(div2);
             $('#s' + p1Position + p1Turn).append(div1);
         },
@@ -125,32 +125,40 @@ $('#rollButton').on('click', function () {
             //var playerPositionStart = playerPosition;
             playerPosition = playerPosition + rollNumber;
             playerSpacesMoved += rollNumber;
+
             if (playerPosition > 12) {
                 playerPosition = playerPosition - 12;
             }
 
             $('#s' + playerPosition + player.playerTurn).append($('#player' + player.playerTurn));
-            
-            //Updates the players position and total moves.
-            $.ajax({
-                type: "PUT",
-                url: "http://localhost:8080/api/game-player",
-                data: JSON.stringify({
-                    id: playerId,
-                    currentTile: playerPosition,
-                    spacesMoved: playerSpacesMoved
-                }),
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                success: function (gamePlayer) {
 
-                },
-                error: function () {
-                    alert("FAILURE PUT GAME PLAYER IN DB!");
-                }
-            });
+            if (playerSpacesMoved >= 36) {
+                $('#buttonDiv').hide();
+                alert(player.playerName + " wins!!");
+                
+            } else {
+
+                //Updates the players position and total moves.
+                $.ajax({
+                    type: "PUT",
+                    url: "http://localhost:8080/api/game-player",
+                    data: JSON.stringify({
+                        id: playerId,
+                        currentTile: playerPosition,
+                        spacesMoved: playerSpacesMoved
+                    }),
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    success: function (gamePlayer) {
+
+                    },
+                    error: function () {
+                        alert("FAILURE PUT GAME PLAYER IN DB!");
+                    }
+                });
+            }
 
         },
         error: function () {
