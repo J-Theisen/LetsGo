@@ -93,7 +93,7 @@ function loadCharactersOnBoard() {
 function highlightCurrentPlayer() {
     $('tr').css("background-color", "white");
     var playerTurn = $('#playerTurn').val() * 1;
-    var p = $('p[data-playerTurn=' + playerTurn + ']');
+    var p = $('h4[data-playerTurn=' + playerTurn + ']');
     p.parent().parent().css("background-color", "red");
 }
 
@@ -105,7 +105,7 @@ $('#rollButton').on('click', function () {
     var playerTurn = $('#playerTurn').val() * 1;
     var numPlayers = $('#numPlayers').val() * 1;
     var gameIdSplit = getGameIdFromUrl();
-    var p = $('p[data-playerTurn=' + playerTurn + ']');
+    var p = $('h4[data-playerTurn=' + playerTurn + ']');
     var playerId = p.data('playerid') * 1;
 
     $.ajax({
@@ -133,7 +133,7 @@ $('#rollButton').on('click', function () {
             $('#s' + playerPosition + player.playerTurn).append($('#player' + player.playerTurn));
 
             if (playerSpacesMoved >= 36) {
-                $('#buttonDiv').hide();
+                $('#rollRow').hide();
                 alert(player.playerName + " wins!!");
                 
             } else {
@@ -171,7 +171,7 @@ $('#rollButton').on('click', function () {
     if (playerTurn > numPlayers) {
         playerTurn = 1;
     }
-    //Uodates whos turn it is in game.
+    //Updates whos turn it is in game.
     $.ajax({
         type: "PUT",
         url: "http://localhost:8080/api/game",

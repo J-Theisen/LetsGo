@@ -14,29 +14,24 @@
 </head>
 
 <body onload="loadUp()">
-
-    <div class="row">
-        <div id="playerInfoContainer" class="container col-md-3">
-            <div id="gamePlayerTableDiv" class="container">
-                <table id="gamePlayerTable" class="table table-bordered">
+    <div class="conatiner">
+        <div id="playerInfoContainer" class="col-md-3">
+            <div id="gamePlayerTableDiv">
+                <table id="gamePlayerTable" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Turn Number: </th>
-                            <th>Players:</th>
-                            <th>image</th>
-                            <!-- <th>Monies</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="gamePlayer : ${players}">
                             <td>
-                                <p th:text="${gamePlayer.playerTurn}" th:data-playerid="${gamePlayer.id}"
-                                    th:data-playerTurn="${gamePlayer.playerTurn}"></p>
+                                <h4 th:text="${gamePlayer.playerTurn}" th:data-playerid="${gamePlayer.id}"
+                                    th:data-playerTurn="${gamePlayer.playerTurn}"></h4>
                             </td>
                             <td>
-                                <p th:text="${gamePlayer.playerName}"></p>
+                                <h4 th:text="${gamePlayer.playerName}"></h4>
                             </td>
-                            <td >
+                            <td>
                                 <img class="displayImage" th:src="${gamePlayer.imageUrl}" alt="">
                             </td>
                             <!-- <td>
@@ -52,7 +47,7 @@
         <input type="hidden" id="numPlayers" th:value="${players.size()}">
 
 
-        <div id="gameContainer" class="container col-md-9">
+        <div id="gameContainer" class="col-md-9">
             <div id="wholeGameBoard">
                 <div class="row">
                     <div id="t1" class="tile border">
@@ -88,11 +83,11 @@
                         <div id="s22" class="space"></div>
                         <div id="s21" class="space"></div>
                     </div>
-                    <div class="tile border">
-                        <p>nothing</p>
+                    <div class="tile border nothingTile">
+                        <p></p>
                     </div>
-                    <div class="tile border">
-                        <p>nothing</p>
+                    <div class="tile border nothingTile">
+                        <p></p>
                     </div>
                     <div id="t9" class="tile border">
                         <div id="s94" class="space"></div>
@@ -109,11 +104,11 @@
                         <div id="s32" class="space"></div>
                         <div id="s31" class="space"></div>
                     </div>
-                    <div class="tile border">
-                        <p>nothing</p>
+                    <div class="tile border nothingTile">
+                        <p></p>
                     </div>
-                    <div class="tile border">
-                        <p>nothing</p>
+                    <div class="tile border nothingTile">
+                        <p></p>
                     </div>
                     <div id="t8" class="tile border">
                         <div id="s84" class="space"></div>
@@ -152,17 +147,28 @@
             </div>
 
         </div>
-        <div class="container">
-            <div id="buttonDiv">
-                <div class="row">
-                    <button id="rollButton" class="btn btn-primary">Roll!</button>
-                    <h5 id="rollNumber">Roll!</h5>
+        <div class="row">
+            <div id="buttonDiv" class="col-md-3">
+                <div id="rollRow" class="row">
+                    <button id="rollButton" class="btn btn-primary col-md-6">Roll!</button>
+                    <div id="rollNumberTextDiv" class="col-md-6">
+                        <h4 id="rollNumber">Roll!</h4>
+                    </div>
+                </div>
+                <div id="homeButtonRow" class="row">
+                    <div class="col-md-4"></div>
+                    <div id="homeButtonDiv" class="cl-md-4">
+                        <a href="/" class="btn btn-primary">Home</a>
+                    </div>
+                    <div class="col-md-4"></div>
                 </div>
             </div>
+
         </div>
 
         <script src="/js/jquery-2.2.4.js"></script>
         <script src="/js/game.js"></script>
+    </div>
 </body>
 
 </html>

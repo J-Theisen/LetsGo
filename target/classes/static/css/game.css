@@ -3,11 +3,9 @@ body {
 }
 
 #gameContainer {
-    
     position: absolute;
     top: 50%;
     left: 50%;
-
     width: 500.5px;
     height: 500.5px;
     /* Translate just moves the board(in this case to center of scren
@@ -17,9 +15,14 @@ body {
     transform:  translate(-10%, -60%)rotate(-40deg) skewX(30deg) skewY(10deg);
 }
 
-#buttonDiv{
-    background-color: lightblue;
-    width: 10%;
+#gamePlayerTable{
+    border-radius: 25px;
+}
+
+
+
+th{
+    text-align:center;
 }
 
 p {
@@ -35,9 +38,7 @@ p {
     border-radius: 25px;
     width: 125px;
     height: 125px;
-    background-color: black;
-    /* text-align:center; */
-    /* position : relative; */
+    background-color: greenyellow;
 }
 
 .displayImage{
@@ -47,8 +48,22 @@ p {
     width: 50%;
 }
 
+#rollRow, #homeButtonRow{
+    margin-left:10px;
+}
+
+#homeButtonDiv{
+    margin-top:20px;
+}
+
 #rollNumber{
-    padding-left: 15px;
+    text-align: center;
+    
+}
+
+#rollNumberTextDiv{
+    border-radius: 25px;
+    background-color: lightblue;
 }
 
 #player1Image {
@@ -64,7 +79,6 @@ p {
 
 #player1{
     transform: translate(70px, -100px) skew(-50deg); 
-      
 }
 
 
@@ -74,10 +88,8 @@ p {
     border:0;
     width: 80px;
     height:80px;
-
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
      /* animation: float 6s ease-in-out infinite;  */
-      
 }
 
 #player2{
@@ -93,7 +105,6 @@ p {
     height:80px;
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
     /* animation: float 6s ease-in-out infinite; */
-      
 }
 
 #player3{
@@ -109,15 +120,12 @@ p {
     height:80px;
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
     /* animation: float 6s ease-in-out infinite; */
-      
 }
 
 #player4{
     transform: translate(70px, -90px) skew(-50deg);  
     animation: floatFour 0.3s ease-in-out infinite; 
 }
-
-
 
 @keyframes floatOne {
     0%, 100% {
