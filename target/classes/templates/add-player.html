@@ -8,65 +8,53 @@
     <title>Lets Go!</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/addPlayer.css">
 </head>
 
 <body>
-    <div class="row">
-
-        <div class="col-md-3">
-            <div id="playerTableDiv" class="container">
-                <table id="playerTable" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Players Added to Game</th>
-                        </tr>
-                    </thead>
-                    <tr th:each="gamePlayer : ${players}">
-                        <td>
-                            <p th:text="${gamePlayer.playerName}">test</p>
-                        </td>
-                        </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div id="addPlayerInfoDiv" class="col-md-6">
-            <div class="container">
-                <div class="row">
-                    <h1>Add Player</h1>
+    <div class="container">
+        <div class="menu">
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="playerTableDiv">
+                        <table id="playerTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Players</th>
+                                </tr>
+                            </thead>
+                            <tbody <tr th:each="gamePlayer : ${players}">
+                                <td>
+                                    <h6 th:text="${gamePlayer.playerName}">test</h6>
+                                </td>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <form method="POST">
+                <div id="addPlayerInfoDiv" class="col-md-6">
                     <div class="row">
-                        <div th:if='${players.size()}<4'>
-                            <label class="label label-primary" for="playerName">
-                                <p> Player Name: </p>
-                            </label>
-                            <input id="playerName" class="form-control" name="playerName" type="text" size="35">
+                        <h1>Add Player</h1>
+                    </div>
+                    <hr>
+                    <form method="POST">
+                        <div class="row">
+                            <div th:if="${players.size()}<4">
+                                <label class="label label-primary" for="playerName">
+                                    <p> Player Name: </p>
+                                </label>
+                                <input id="playerName" class="form-control" name="playerName" type="text" size="35">
+                            </div>
                             <div th:if="${#fields.hasErrors('gamePlayer.playerName')}">
-                            <p th:each="error : ${#fields.errors('gamePlayer.playerName')}" class="alert alert-danger" th:text="${error}"></p>
+                                <p th:each="error : ${#fields.errors('gamePlayer.playerName')}" class="alert alert-danger" th:text="${error}"></p>
+                            </div>
                         </div>
-                    </div>
-                    </div>
-                    <div class="row"  th:if='${players.size()}<4'>
-                        <button name="joinButton" id="joinButton" class="btn btn-primary" type="submit">Join</button>
-                    </div>
-                    <div class="row">
-                            <a href="/" class="btn btn-danger">Cancel</a>
-                    </div>
-
-                </form>
-                <div class="row">
-                    <div id="beginGameButton" th:if='${players.size()}>1'</div>
-                        <a href="/" th:href="@{/game/{username}/{gameId}(username=${gameLeader},gameId=${gameId})}"
-                            class="btn btn-primary">Begin!</a>
-                    </div>
+                        <div class="row">
+                            <button th:if='${players.size()}<4' name="joinButton" id="joinButton" class="btn btn-primary buttonClass" type="submit">Join</button>
+                            <a href="/" th:href="@{/game/{username}/{gameId}(username=${gameLeader},gameId=${gameId})}" th:if="${players.size()} > 1" class="btn btn-primary buttonClass">Begin!</a>
+                            <a href="/" class="btn btn-danger buttonClass">Cancel</a>     
+                        </div>
+                    </form>
                 </div>
-
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="container">
-                <h1></h1>
             </div>
         </div>
     </div>

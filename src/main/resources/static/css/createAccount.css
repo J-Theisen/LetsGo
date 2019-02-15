@@ -3,12 +3,12 @@ body{
     animation: bgColorChange 10s ease-in-out infinite;
 }
 
-#createButton{
+.buttonStyle{
     margin-top:15px;
     margin-right:15px;
 }
 
-#cancelButton{
+.buttonStyle{
     margin-top:15px;
 }
 

@@ -8,10 +8,6 @@ body {
     left: 50%;
     width: 500.5px;
     height: 500.5px;
-    /* Translate just moves the board(in this case to center of scren
-        rotate rotates the board
-        Skew is the main thing thatll angle the board how we want.
-    */
     transform:  translate(-10%, -60%)rotate(-40deg) skewX(30deg) skewY(10deg);
 }
 
@@ -92,9 +88,6 @@ h6 {
 
     -webkit-animation: jump 1s ease 0s infinite normal ;
     animation: jump 1s ease 0s infinite normal ;
-    /* animation: floatOne 0.8s ease-in-out infinite;  */
-    /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
-	 /* animation: float 6s ease-in-out infinite;  */
 }
 
 .imgClass:hover {
@@ -133,8 +126,6 @@ h6 {
 
     -webkit-animation: jump 1.5s ease 0s infinite normal ;
     animation: jump 1.5s ease 0s infinite normal ;
-    /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
-    /* animation: float 6s ease-in-out infinite; */
 }
 
 #player3{
@@ -150,8 +141,6 @@ h6 {
 
     -webkit-animation: jump 1.75s ease 0s infinite normal ;
     animation: jump 1.75s ease 0s infinite normal ;
-    /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
-    /* animation: float 6s ease-in-out infinite; */
 }
 
 #player4{
@@ -162,12 +151,6 @@ h6 {
   animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
   
 }
-
-
-
-/* #gamePlayerTable tr:hover{
-    background-color:lightgreen;
-} */
 
 @keyframes floatOne {
     0%, 100% {
