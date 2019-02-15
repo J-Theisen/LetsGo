@@ -63,19 +63,19 @@ function loadCharactersOnBoard() {
                 if (playerTurn === 1) {
                     p1Position = player.currentTile;
                     p1Turn = player.playerTurn;
-                    div1 = '<div id="player' + playerTurn + '" ><p>' + player.playerName + '</p>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
+                    div1 = '<div class="imgClass" id="player' + playerTurn + '" ><h6>' + player.playerName + '</h6>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
                 } else if (playerTurn === 2) {
                     p2Position = player.currentTile;
                     p2Turn = player.playerTurn;
-                    div2 = '<div id="player' + playerTurn + '" ><p>' + player.playerName + '</p>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
+                    div2 = '<div class="imgClass" id="player' + playerTurn + '" ><h6>' + player.playerName + '</h6>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
                 } else if (playerTurn === 3) {
                     p3Position = player.currentTile;
                     p3Turn = player.playerTurn;
-                    div3 = '<div id="player' + playerTurn + '" ><p>' + player.playerName + '</p>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
+                    div3 = '<div class="imgClass" id="player' + playerTurn + '" ><h6>' + player.playerName + '</h6>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
                 } else if (playerTurn === 4) {
                     p4Position = player.currentTile;
                     p4Turn = player.playerTurn;
-                    div4 = '<div id="player' + playerTurn + '" ><p>' + player.playerName + '</p>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
+                    div4 = '<div class="imgClass" id="player' + playerTurn + '" ><h6>' + player.playerName + '</h6>  <img id="player' + playerTurn + 'Image" src="' + playerImage + '"> </div>';
                 }
             });
 
@@ -134,8 +134,13 @@ $('#rollButton').on('click', function () {
 
             if (playerSpacesMoved >= 36) {
                 $('#rollRow').hide();
-                alert(player.playerName + " wins!!");
-                
+                $('#winnerName').text(player.playerName + " wins! ");
+                $('#gamePlayerTable').hide();
+                $('#winnerDiv').css("background-color", "rgb(64, 255, 47)");
+                $("#").appendTo($('#'));
+                $('#winnerDiv').show();
+
+
             } else {
 
                 //Updates the players position and total moves.

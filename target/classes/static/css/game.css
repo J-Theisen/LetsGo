@@ -19,13 +19,21 @@ body {
     border-radius: 25px;
 }
 
+#winnerName{
+    text-align:center;
+}
 
+#winnerDiv{
+    display:none;
+    border-radius: 25px;
+    animation: winnerDivColorChange 4s infinite;
+}
 
 th{
     text-align:center;
 }
 
-p {
+h6 {
     text-align: center;
 }
 
@@ -38,7 +46,7 @@ p {
     border-radius: 25px;
     width: 125px;
     height: 125px;
-    background-color: rgb(64, 255, 47);
+    background-color:rgb(4, 165, 4);
 }
 
 .displayImage{
@@ -54,8 +62,6 @@ p {
 
 .tree{
     transform: translate(80px, -100px) skew(-50deg); 
-    
-    
 }
 
 .treeImage{
@@ -83,10 +89,18 @@ p {
     border:0;
     width: 80px;
     height:80px;
-    animation: floatOne 0.8s ease-in-out infinite; 
+
+    -webkit-animation: jump 1s ease 0s infinite normal ;
+    animation: jump 1s ease 0s infinite normal ;
+    /* animation: floatOne 0.8s ease-in-out infinite;  */
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
 	 /* animation: float 6s ease-in-out infinite;  */
 }
+
+.imgClass:hover {
+   
+    transform: rotate(360deg);
+  }
 
 #player1{
     transform: translate(70px, -100px) skew(-50deg); 
@@ -99,13 +113,15 @@ p {
     border:0;
     width: 80px;
     height:80px;
+
+    -webkit-animation: jump 2s ease 0s infinite normal ;
+    animation: jump 2s ease 0s infinite normal ;
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
      /* animation: float 6s ease-in-out infinite;  */
 }
 
 #player2{
     transform: translate(70px, -100px) skew(-50deg); 
-    animation: floatTwo 0.5s ease-in-out infinite; 
 }
 
 #player3Image {
@@ -114,13 +130,15 @@ p {
     border:0;
     width: 80px;
     height:80px;
+
+    -webkit-animation: jump 1.5s ease 0s infinite normal ;
+    animation: jump 1.5s ease 0s infinite normal ;
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
     /* animation: float 6s ease-in-out infinite; */
 }
 
 #player3{
     transform: translate(70px, -90px) skew(-50deg);  
-    animation: floatThree 1s ease-in-out infinite;
 }
 
 #player4Image {
@@ -129,21 +147,36 @@ p {
     border:0;
     width:80px;
     height:80px;
+
+    -webkit-animation: jump 1.75s ease 0s infinite normal ;
+    animation: jump 1.75s ease 0s infinite normal ;
     /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
     /* animation: float 6s ease-in-out infinite; */
 }
 
 #player4{
     transform: translate(70px, -90px) skew(-50deg);  
-    animation: floatFour 0.3s ease-in-out infinite; 
 }
+
+.tree:hover{
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  
+}
+
+#playerInfoContainer{
+    background-color:lightblue;
+}
+
+/* #gamePlayerTable tr:hover{
+    background-color:lightgreen;
+} */
 
 @keyframes floatOne {
     0%, 100% {
-        left: 0;
+        top: 0;
       }
       50% {
-        left: 01%;
+        bottom: 100%;
       }
 }
 
@@ -173,4 +206,82 @@ p {
         left: 01%;
       }
 }
+@keyframes winnerDivColorChange {
+    0%   {background-color: rgb(21, 231, 21);}
+    25%  {background-color: yellowgreen;}
+    50%  {background-color: green;}
+    100% {background-color: rgb(21, 231, 21);}
+  }
 
+  @-webkit-keyframes jump {
+    0%{
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    20%{
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    40%{
+      -webkit-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+    50%{
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    60%{
+      -webkit-transform: translateY(-15px);
+      transform: translateY(-15px);
+    }
+    80%{
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    100%{
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes jump {
+    0%{
+      transform: translateY(0);
+    }
+    20%{
+      transform: translateY(0);
+    }
+    40%{
+      transform: translateY(-30px);
+    }
+    50%{
+      transform: translateY(0);
+    }
+    60%{
+      transform: translateY(-15px);
+    }
+    80%{
+      transform: translateY(0);
+    }
+    100%{
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shake {
+    10%, 90% {
+      transform: translate(80px, -100px) skew(-50deg); 
+    }
+    
+    20%, 80% {
+      transform:translate(82px, -100px) skew(-50deg); 
+    }
+  
+    30%, 50%, 70% {
+      transform: translate(83px, -100px) skew(-50deg); 
+    }
+  
+    40%, 60% {
+      transform: translate(80px, -100px) skew(-50deg); 
+    }
+  }
