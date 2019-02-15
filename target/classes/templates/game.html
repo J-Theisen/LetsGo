@@ -20,6 +20,10 @@
                 <table id="gamePlayerTable" class="table table-striped">
                     <thead>
                         <tr>
+                            <th>Player Number</th>
+                            <th>PlayerName</th>
+                            <th></th>
+                            <th>Money</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,9 +38,9 @@
                             <td>
                                 <img class="displayImage" th:src="${gamePlayer.imageUrl}" alt="">
                             </td>
-                            <!-- <td>
-                                <p th:text="${gamePlayer.playerCurrency}"></p>
-                            </td> -->
+                            <td>
+                                <h4 th:id="'playerMoney' + ${gamePlayer.playerTurn}" th:text="${gamePlayer.playerCurrency}"></h4>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

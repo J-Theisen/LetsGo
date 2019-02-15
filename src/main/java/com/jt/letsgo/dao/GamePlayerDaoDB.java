@@ -41,8 +41,6 @@ public class GamePlayerDaoDB implements GamePlayerDao {
         final String GET_ALL_PLAYERS_FOR_GAME = "SELECT * FROM GamePlayer WHERE GameId = ?";
         return jdbc.query(GET_ALL_PLAYERS_FOR_GAME, new GamePlayerMapper(), gameId);
     }
-    
-    
 
     @Override
     public GamePlayer updateGamePlayerCurrency(GamePlayer gp) {
@@ -57,8 +55,6 @@ public class GamePlayerDaoDB implements GamePlayerDao {
         jdbc.update(UPDATE_PLAYER, gp.getPlayerCharacter(), gp.getImageUrl(), gp.getGameId(), gp.getPlayerName());
         return gp;
     }
-    
-    
 
     @Override
     public GamePlayer updateTurnNumber(GamePlayer gp) {

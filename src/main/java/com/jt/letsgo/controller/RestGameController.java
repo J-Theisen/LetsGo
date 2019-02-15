@@ -27,12 +27,19 @@ public class RestGameController {
 
     @Autowired
     GamePlayerService gpService;
-
+    
     //Get all tiles for game
     @GetMapping("/api/getTiles/{gameId}")
     public List<BoardTile> getTilesForGame(@PathVariable int gameId) {
         List<BoardTile> boardTiles = btService.getBoardTilesForGame(gameId);
         return boardTiles;
+    }
+    
+    //Gets a specific tile
+    @GetMapping("/api/getTile/{gameId}/{tileId}")
+    public BoardTile getBoardTile(@PathVariable int gameId, @PathVariable int tileId){
+        BoardTile tile = btService.getBoardTile(gameId, tileId);
+        return tile;
     }
 
     //Gets a game

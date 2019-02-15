@@ -115,7 +115,9 @@ $('#rollButton').on('click', function () {
             //Where the player is at before the roll.
             var playerPosition = player.currentTile;
             var playerSpacesMoved = player.spacesMoved;
-
+            var pCurrency = player.playerCurrency;
+            var pTurn = player.playerTurn;
+            var moneyOfTile = 0;
             //Dice Roll
             var min = 1;
             var max = 4;
@@ -129,6 +131,64 @@ $('#rollButton').on('click', function () {
             if (playerPosition > 12) {
                 playerPosition = playerPosition - 12;
             }
+            //Gets the tile color
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8080/api/getTile/' + gameIdSplit + '/' + playerPosition,
+                success: function (tile) {
+                   
+                    var tType = tile.tileType;
+                    
+                    if(tile.tileType==='BLUE'){
+                        pCurrency+=3;
+                        $.ajax({
+                            type: "PUT",
+                            url: "http://localhost:8080/api/game-player",
+                            data: JSON.stringify({
+                                id: playerId,
+                                currentTile: playerPosition,
+                                spacesMoved: playerSpacesMoved,
+                                playerCurrency: pCurrency
+                            }),
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            success: function (gamePlayer) {
+                                $('#playerMoney'+pTurn).text(pCurrency);
+                            },
+                            error: function () {
+                                alert("FAILURE PUT GAME PLAYER IN DB!");
+                            }
+                        });
+                    } else {
+                        pCurrency+= -1;
+                        $.ajax({
+                            type: "PUT",
+                            url: "http://localhost:8080/api/game-player",
+                            data: JSON.stringify({
+                                id: playerId,
+                                currentTile: playerPosition,
+                                spacesMoved: playerSpacesMoved,
+                                playerCurrency: pCurrency
+                            }),
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            success: function (gamePlayer) {
+                                $('#playerMoney'+pTurn).text(pCurrency);
+                            },
+                            error: function () {
+                                alert("FAILURE PUT GAME PLAYER IN DB!");
+                            }
+                        });
+                    }
+                },
+                error: function () {
+                    alert("FAILURE GET TILE");
+                }
+            });
 
             $('#s' + playerPosition + player.playerTurn).append($('#player' + player.playerTurn));
 
@@ -142,7 +202,8 @@ $('#rollButton').on('click', function () {
 
 
             } else {
-
+                //This is where youd stop going negative
+                
                 //Updates the players position and total moves.
                 $.ajax({
                     type: "PUT",
@@ -150,14 +211,13 @@ $('#rollButton').on('click', function () {
                     data: JSON.stringify({
                         id: playerId,
                         currentTile: playerPosition,
-                        spacesMoved: playerSpacesMoved
+                        spacesMoved: playerSpacesMoved,
                     }),
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json"
                     },
                     success: function (gamePlayer) {
-
                     },
                     error: function () {
                         alert("FAILURE PUT GAME PLAYER IN DB!");
