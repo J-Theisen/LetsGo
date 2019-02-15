@@ -2,6 +2,7 @@
 function loadUp() {
     paintTiles();
     loadCharactersOnBoard();
+    //checkMonies();
 };
 
 function paintTiles() {
@@ -95,12 +96,13 @@ function highlightCurrentPlayer() {
     var playerTurn = $('#playerTurn').val() * 1;
     var p = $('h4[data-playerTurn=' + playerTurn + ']');
     p.parent().parent().css("background-color", "rgb(64, 255, 47)");
+   
 }
 
 highlightCurrentPlayer();
 
 $('#rollButton').on('click', function () {
-
+    
     //Grabbing whos turn it is and how many players there are for the game.
     var playerTurn = $('#playerTurn').val() * 1;
     var numPlayers = $('#numPlayers').val() * 1;
@@ -140,7 +142,7 @@ $('#rollButton').on('click', function () {
                     var tType = tile.tileType;
                     
                     if(tile.tileType==='BLUE'){
-                        pCurrency+=3;
+                        pCurrency+=2;
                         $.ajax({
                             type: "PUT",
                             url: "http://localhost:8080/api/game-player",
@@ -162,7 +164,10 @@ $('#rollButton').on('click', function () {
                             }
                         });
                     } else {
-                        pCurrency+= -1;
+                        if(pCurrency-1 >= 0){
+                            pCurrency+= -1;
+                        }
+                        
                         $.ajax({
                             type: "PUT",
                             url: "http://localhost:8080/api/game-player",
@@ -256,4 +261,37 @@ $('#rollButton').on('click', function () {
             alert("FAILURE UPDATE GAME WHOS UP!");
         }
     });
+    checkMonies();
 });
+
+function checkMonies(){
+    var playerTurn = $('#playerTurn').val() * 1;
+    var numPlayers = $('#numPlayers').val() * 1;
+    playerTurn++;
+    if (playerTurn > numPlayers) {
+        playerTurn = 1;
+    }
+    var gameIdSplit = getGameIdFromUrl();
+    var p = $('h4[data-playerTurn=' + playerTurn + ']');
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/api/get-game-player/' + gameIdSplit + '/' + playerTurn,
+        success: function (player) {
+            if(player.playerCurrency>=5){
+                $('#buySpaceDiv').css("visibility", "visible");
+            } else {
+                $('#buySpaceDiv').css("visibility", "hidden");
+            }
+
+            // if(player.playerCurrency>=10){
+            //      $('#switchPlayerDiv').css("visibility", "visible");
+            // } else {
+            //      $('#switchPlayerDiv').css("visibility", "hidden");
+            // }
+        },
+        error: function () {
+            alert("FAILURE GET GAME PLAYER");
+        }
+    });
+}

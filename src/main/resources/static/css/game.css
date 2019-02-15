@@ -52,8 +52,17 @@ h6 {
     width: 50%;
 }
 
-#rollRow, #homeButtonRow{
+#rollRow, #homeButtonRow, #buyingRow{
     margin-left:10px;
+}
+
+#buySpaceDiv, #switchPlayerDiv{
+  margin-top:10px;
+  visibility: hidden;
+}
+
+#homeButtonRow{
+  margin-top:40px;
 }
 
 .tree{
