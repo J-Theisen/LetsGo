@@ -1,18 +1,19 @@
-body {
- background-color: lightcyan;
- animation: bgColorChange 10s ease-in-out infinite;
-}
-
-.menu{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+body{
+    background-color: lightcyan;
+    animation: bgColorChange 10s ease-in-out infinite;
 }
 
 #createButton{
+    margin-top:15px;
+    margin-right:15px;
+}
+
+#cancelButton{
+    margin-top:15px;
+}
+
+.inputRow{
     margin-top:10px;
-    margin-right:10px;
 }
 
 @keyframes bgColorChange {
@@ -22,4 +23,3 @@ body {
     75%  {background-color: lightblue;}
     100% {background-color: lightcyan(21, 231, 21);}
   }
-  

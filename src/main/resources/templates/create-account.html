@@ -8,20 +8,17 @@
     <title>Lets Go!!</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/createAccount.css">
 </head>
 
 <body>
     <div class="container">
         <div class="row">
-            <h1>Create Account</h1>
+            <h1 id="createAccount">Create Account</h1>
         </div>
-        <!-- <div class="row">
-            <div class="col-12 m-1 text-center" th:if="${!errors.isEmpty()}">
-                <p class="alert alert-danger" th:each="error : ${errors}" th:text="${error.message}">Error message</p>
-            </div>
-        </div> -->
+        <hr>
         <form method="POST">
-            <div class="row">
+            <div class="row inputRow">
                 <label for="userName">
                     <h6>Username:</h6>
                 </label>
@@ -31,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row inputRow">
                 <label for="firstName">
                     <h6>First Name:</h6>
                 </label>
@@ -41,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row inputRow">
                 <label for="lastName">
                     <h6>Last Name:</h6>
                 </label>
@@ -60,7 +57,7 @@
                     <p th:each="error : ${#fields.errors('player.playerEmail')}" class="alert alert-danger" th:text="${error}"></p>
                 </div>
             </div> -->
-            <div class="row">
+            <div class="row inputRow">
                 <label for="password">
                     <h6>Password:</h6>
                 </label>
@@ -71,7 +68,7 @@
             </div>
             
             <div class="row">
-                <!-- <div id="createButton"><a href="" class="btn btn-primary">Create!</a></div> -->
+                
                 <button id="createButton" type="submit" class="btn btn-primary">Create Account!</button>
                 <div id="cancelButton"><a href="/" class="btn btn-danger">Cancel</a></div>
             </div>
