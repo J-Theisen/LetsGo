@@ -2,7 +2,7 @@
 function loadUp() {
     paintTiles();
     loadCharactersOnBoard();
-    //checkMonies();
+    checkMonies();
 };
 
 
@@ -209,6 +209,19 @@ $('#rollButton').on('click', function () {
                 $("#").appendTo($('#'));
                 $('#winnerDiv').show();
 
+                $.ajax({
+                    type: "PUT",
+                    url: "http://localhost:8080/gameover/api/" + gameIdSplit,
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    success: function (gamePlayer) {
+                    },
+                    error: function () {
+                        alert("FAILURE on GAME OVER");
+                    }
+                });
 
             } else {
                 //This is where youd stop going negative
@@ -411,11 +424,21 @@ $('#buySpaceButton').on('click', function () {
                 $("#").appendTo($('#'));
                 $('#winnerDiv').show();
 
+                $.ajax({
+                    type: "PUT",
+                    url: "http://localhost:8080/gameover/api/" + gameIdSplit,
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    success: function (gamePlayer) {
+                    },
+                    error: function () {
+                        alert("FAILURE on GAME OVER");
+                    }
+                });
 
             } else {
-                //This is where youd stop going negative
-
-                //Updates the players position and total moves.
                 $.ajax({
                     type: "PUT",
                     url: "http://localhost:8080/api/game-player",
@@ -435,7 +458,6 @@ $('#buySpaceButton').on('click', function () {
                     }
                 });
             }
-
         },
         error: function () {
             alert("FAILURE GET GAME PLAYER");

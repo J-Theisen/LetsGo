@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game Select</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Games for Player</h1>
+        <div id="GamesTableDiv">
+            <table id="gamesTable" class="table table-striped">
+                <thead>
+                    <th>Games</th>
+                    <th>Players In Game</th>
+                    <th>Start Date/Time</th>
+                </thead>
+                <!-- th:if="${#strings.equals(${game.startTime},'')}"     1900-01-01T00:00-->
+                <tbody th:each="game : ${games}">
+                    <tr>
+                        <td>
+                            <a th:href="@{/game/{username}/{id}(username=${game.gameLeader},id=${game.gameId})}" th:text="${game.gameId}"></a>
+                        </td>
+                        <td>
+                            <h6 th:each="listOfPlayersForGame : ${map}"
+                                th:if="${game.gameId} == ${listOfPlayersForGame.key}"
+                                th:text="${listOfPlayersForGame.value}">
+                            </h6>
+                        </td>
+                        <td>
+                            <h6 th:text="${#strings.substring(game.startTime,0,10)}"></h6>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

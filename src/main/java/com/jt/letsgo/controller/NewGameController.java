@@ -39,7 +39,7 @@ public class NewGameController {
     }
 
     @PostMapping("/new-game")
-    public String newGame(String userName, String playerPassword, Model model) {
+    public String newGame(String userName, String playerPassword) {
         Player player = players.getPlayerByUsername(userName);
         if (player == null) {
             return "new-game";
@@ -47,7 +47,6 @@ public class NewGameController {
             return "new-game";
         } else {
             Player playerModel = players.getPlayerByUsername(userName);
-            //model.addAttribute("player", playerModel);
             Game returnGame = gameService.createNewGame(userName);
             gpService.addPlayerToGame(userName, returnGame.getGameId());
             btService.createBoardTilesForGame(returnGame.getGameId());

@@ -16,6 +16,7 @@ public class Game {
     private LocalDateTime endTime;
     private int gameStarted;
     private int playerTurn;
+    
 
     public int getGameId() {
         return gameId;
@@ -72,7 +73,7 @@ public class Game {
     public void setPlayerTurn(int playerTurn) {
         this.playerTurn = playerTurn;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 3;

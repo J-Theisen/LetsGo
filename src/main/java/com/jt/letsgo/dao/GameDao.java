@@ -13,4 +13,5 @@ public interface GameDao {
     Game updateGameOver(Game game);
     Game updateGameStarted(Game game);
     Game updateGame(Game game);
+    List<Game> getGamesNotCompleted(String username);
 }

@@ -33,13 +33,8 @@ public class GameDaoDB implements GameDao {
 
     @Override
     public List<Game> getGamesByUsername(String username) {
-        try {
-            final String GET_GAMES_BY_USERNAME = "SELECT * FROM Game WHERE GameLeader = ?";
-            return jdbc.query(GET_GAMES_BY_USERNAME, new GameMapper(), username);
-
-        } catch (DataAccessException ex) {
-            return null;
-        }
+        final String GET_GAMES_BY_USERNAME = "SELECT * FROM Game WHERE GameLeader = ?";
+        return jdbc.query(GET_GAMES_BY_USERNAME, new GameMapper(), username);
     }
 
     @Override
@@ -55,24 +50,28 @@ public class GameDaoDB implements GameDao {
         jdbc.update(UPDATE_GAME,
                 endTime,
                 game.getGameId());
-         return getGameById(game.getGameId());
+        return getGameById(game.getGameId());
     }
 
     @Override
     public Game updateGameStarted(Game game) {
         final String UPDATE_GAME_OVER = "UPDATE Game SET GameStarted = 1 WHERE GameId = ?";
         jdbc.update(UPDATE_GAME_OVER, game.getGameId());
-         return getGameById(game.getGameId());
+        return getGameById(game.getGameId());
     }
 
     @Override
     public Game updateGame(Game game) {
-         final String UPDATE_GAME_OVER = "UPDATE Game SET PlayerTurn = ? WHERE GameId = ?";
-         jdbc.update(UPDATE_GAME_OVER, game.getPlayerTurn(), game.getGameId());
-         return getGameById(game.getGameId());
+        final String UPDATE_GAME_OVER = "UPDATE Game SET PlayerTurn = ? WHERE GameId = ?";
+        jdbc.update(UPDATE_GAME_OVER, game.getPlayerTurn(), game.getGameId());
+        return getGameById(game.getGameId());
     }
-    
-    
+
+    @Override
+    public List<Game> getGamesNotCompleted(String username) {
+        final String GET_GAMES_BY_USERNAME = "SELECT * FROM Game WHERE GameLeader = ? AND Endtime='1900-01-01 00:00:00'";
+        return jdbc.query(GET_GAMES_BY_USERNAME, new GameMapper(), username);
+    }
 
     public static final class GameMapper implements RowMapper<Game> {
 
